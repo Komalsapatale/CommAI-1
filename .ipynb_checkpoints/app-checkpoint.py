@@ -1,14 +1,20 @@
 from flask import Flask, render_template, request, jsonify
+from langchain_ollama import OllamaLLM
+from langchain_core.prompts import ChatPromptTemplate
 import json
+# from evaluation_parameters import evaluate_clarity, evaluate_conciseness, evaluate_sentiment, evaluate_engagement, evaluate_grammarm, evaluate_vocabulary_usage, evaluate_response_appropriateness, evaluate_politeness
 
 app = Flask(__name__)
 
-# Load the JSON file for predefined responses
-try:
-    with open('responses.json', 'r') as file:
-        responses = json.load(file)
-except FileNotFoundError:
-    responses = {}
+# Chatbot setup
+template = """
+You are now conversational assistent for CommAI Project, make conversation with the user and answer the questions below in less words.
+Here is the conversation history: {context}
+Question: {question}
+Answer:
+"""
+model = OllamaLLM(model='llama3')
+prompt = ChatPromptTemplate.from_template(template)
 
 @app.route('/')
 def index():
@@ -34,19 +40,36 @@ def results():
 @app.route('/ask', methods=['POST'])
 def ask():
     user_input = request.json.get('message')
-    response = responses.get(user_input, "I don't know the  to that. Could you please provide more details?")
-    return jsonify({'response': response})
+    conversation = request.json.get('conversation', '')
+
+    user_input = user_input.capitalize()
+
+    # Append the user input to the conversation history
+    conversation += f"\nUser: {user_input}"
+
+    # Generate AI response using the model
+    result = prompt | model
+    ai_response = result.invoke({"context": conversation, "question": user_input})
+
+    # Append the AI response to the conversation
+    conversation += f"\nAI: {ai_response}"
+
+    # Return the conversation and AI response as JSON
+    return jsonify({'response': ai_response, 'conversation': conversation})
 
 @app.route('/submit', methods=['POST'])
 def submit():
     conversation = request.json.get('conversation')
-    
-    # Append the new conversation to the JSON file
+
+    # Overwrite the previous conversation in the JSON file
     try:
-        with open('conversations.json', 'a') as file:
+        with open('conversations.json', 'w') as file:  # Use 'w' to overwrite
             json.dump(conversation, file)
-            file.write('\n')
-        return jsonify({'status': 'success'})
+        
+        # Redirect to the results page with the conversation as a JSON string
+        conversation_data = json.dumps(conversation)
+        return jsonify({'status': 'success', 'redirect': f'/results?data={conversation_data}'})
+    
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
 

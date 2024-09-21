@@ -13,9 +13,36 @@
 
     <div class="results-container">
         <h1>Conversation Results</h1>
-        <!-- Remove the whiteboard div -->
+
+        {% if results.error %}
+            <p>Error: {{ results.error }}</p>
+        {% else %}
+        
+            <ul>
+                <li><strong>Clarity:</strong> {{ results.Clarity }}</li>
+                <li><strong>Conciseness:</strong> {{ results.Conciseness }}</li>
+                <li><strong>Sentiment:</strong> (Polarity: {{ results.Sentiment[0] }}, Subjectivity: {{ results.Sentiment[1] }})</li>
+                <li><strong>Engagement:</strong> {{ results.Engagement }}</li>
+                <li><strong>Grammar and Spelling Errors:</strong></li>
+                <ul>
+                    {% for error in results['Grammar and Spelling'] %}
+                        <li>Error: {{ error.error }}</li>
+                        <li>Suggestions: 
+                            {% for suggestion in error.suggestion %}
+                                {{ suggestion.value }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </li>
+                        <li>Message: {{ error.message }}</li>
+                        <li>Offset: {{ error.offset }}, Length: {{ error.length }}</li>
+                    {% endfor %}
+                </ul>
+                <li><strong>Vocabulary Usage:</strong> {{ results['Vocabulary Usage'] }}</li>
+                <li><strong>Response Appropriateness:</strong> {{ results['Responce Appropriateness'] }}</li>
+                <li><strong>Politeness:</strong> {{ results.Politeness }}</li>
+            </ul>
+        {% endif %}
+
         <button onclick="window.location.href='/'">Back to Home</button>
     </div>
-    
 </body>
 </html>
