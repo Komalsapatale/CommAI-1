@@ -1,6 +1,6 @@
 from textstat import flesch_reading_ease
 def evaluate_clarity(text):
-    return flesch_reading_ease(text)
+    return flesch_reading_ease(text) 
 
 
 def evaluate_conciseness(text):

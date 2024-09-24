@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversation Results</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
 </head>
 <body>
     <div class="header">
@@ -17,32 +17,224 @@
         {% if results.error %}
             <p>Error: {{ results.error }}</p>
         {% else %}
-        
-            <ul>
-                <li><strong>Clarity:</strong> {{ results.Clarity }}</li>
-                <li><strong>Conciseness:</strong> {{ results.Conciseness }}</li>
-                <li><strong>Sentiment:</strong> (Polarity: {{ results.Sentiment[0] }}, Subjectivity: {{ results.Sentiment[1] }})</li>
-                <li><strong>Engagement:</strong> {{ results.Engagement }}</li>
-                <li><strong>Grammar and Spelling Errors:</strong></li>
-                <ul>
-                    {% for error in results['Grammar and Spelling'] %}
-                        <li>Error: {{ error.error }}</li>
-                        <li>Suggestions: 
-                            {% for suggestion in error.suggestion %}
-                                {{ suggestion.value }}{% if not loop.last %}, {% endif %}
-                            {% endfor %}
-                        </li>
-                        <li>Message: {{ error.message }}</li>
-                        <li>Offset: {{ error.offset }}, Length: {{ error.length }}</li>
-                    {% endfor %}
-                </ul>
-                <li><strong>Vocabulary Usage:</strong> {{ results['Vocabulary Usage'] }}</li>
-                <li><strong>Response Appropriateness:</strong> {{ results['Responce Appropriateness'] }}</li>
-                <li><strong>Politeness:</strong> {{ results.Politeness }}</li>
-            </ul>
-        {% endif %}
+            <div class="container">
+                <!-- Clarity Section -->
+                <div class="clarity-wrapper">
+                    <div class="clarity-info">
+                        <h4>1. Clarity Score</h4>
+                        <p>Your current clarity level is at <strong>{{ results.Clarity }}%</strong>. A score above 70% means your communication is well-structured and easy to understand. For improvement, focus on simplifying complex sentences.</p>
+                        <p>Suggested next steps:</p>
+                        <ul>
+                            <li>Use concise language.</li>
+                            <li>Eliminate unnecessary jargon.</li>
+                            <li>Break down complicated ideas into smaller chunks.</li>
+                        </ul>
+                    </div>
+                    <div class="progress" style="--i:{{ results.Clarity }}; --clr:#f98943;">
+                        <h3 id="clarityPercentage">{{ results.Clarity }}<span>%</span></h3>
+                        <h4>Clarity</h4>
+                    </div>
+                </div>
+                
+                <!-- Conciseness Section -->
+                <div class="conciseness-wrapper">
+                    <div class="conciseness-info">
+                        <h4>2. Conciseness Score</h4>
+                        <p>Your conciseness score is <strong>{{ results.Conciseness }}%</strong>. A high score means you are delivering your message efficiently, without unnecessary details. A score below 60% might indicate verbosity or unclear messaging.</p>
+                        <p>Suggestions for improving conciseness:</p>
+                        <ul>
+                            <li>Avoid repetition and filler words.</li>
+                            <li>Get straight to the point.</li>
+                            <li>Use shorter sentences and simplify your language.</li>
+                        </ul>
+                    </div>
+                    <div class="progress" style="--i:{{ results.Conciseness }}; --clr:#e92c97;">
+                        <h3 id="concisenessPercentage">{{ results.Conciseness }}<span>%</span></h3>
+                        <h4>Conciseness</h4>
+                    </div>
+                </div>
+                
+                <!-- Tone & Sentiment Section -->
+                <div class="sentiment-wrapper">
+                    <div class="sentiment-info">
+                        <h4>3. Tone & Sentiment Score</h4>
+                        <p>The tone and sentiment of your communication is measured at <strong>{{ results.Sentiment[0] }}%</strong>. A score closer to 100% reflects a highly positive or neutral tone, while a lower score indicates a more negative tone.</p>
+                        <p>Suggestions for adjusting tone and sentiment:</p>
+                        <ul>
+                            <li>For a more positive tone, use uplifting language and avoid negative words.</li>
+                            <li>Be mindful of emotional language that can convey unintended negativity.</li>
+                            <li>To achieve a neutral tone, focus on factual statements and avoid emotional extremes.</li>
+                        </ul>
+                    </div>
+                    <div class="progress" style="--i:{{ results.Sentiment[0] }}; --clr:#c629fb;">
+                        <h3 id="tone&sentimentPercentage">{{ results.Sentiment[0] }}<span>%</span></h3>
+                        <h4>Tone & Sentiment</h4>
+                    </div>
+                </div>
 
-        <button onclick="window.location.href='/'">Back to Home</button>
+                <!-- Engagement Section -->
+                <div class="engagement-wrapper">
+                    <div class="engagement-info">
+                        <h4>4. Engagement Score</h4>
+                        <p>Your engagement score is <strong>{{ results.Engagement }}%</strong>. A high score indicates that your audience is actively participating and interacting with your content. Low engagement levels may suggest a need for improvement in content delivery.</p>
+                        <p>Tips to improve engagement:</p>
+                        <ul>
+                            <li>Encourage audience interaction through questions and prompts.</li>
+                            <li>Utilize visuals and multimedia to capture attention.</li>
+                            <li>Maintain a conversational tone to foster connection.</li>
+                        </ul>
+                    </div>
+                    <div class="progress" style="--i:{{ results.Engagement }}; --clr:#ffe047;">
+                        <h3 id="engagementPercentage">{{ results.Engagement }}<span>%</span></h3>
+                        <h4>Engagement</h4>
+                    </div>
+                </div>
+
+                
+                <!-- Vocabulary Usage Section -->
+                <div class="vocabulary-wrapper">
+                    <div class="vocabulary-info">
+                        <h4>5. Vocabulary Usage Score</h4>
+                        <p>Your vocabulary usage score is <strong>{{ results['Vocabulary Usage'] }}%</strong>. This score reflects the richness and variety of words used in your writing, which contributes to clarity and engagement.</p>
+                        <p>Tips to improve vocabulary usage:</p>
+                        <ul>
+                            <li>Read widely across different genres to expose yourself to new words.</li>
+                            <li>Practice using new words in your writing and conversations.</li>
+                            <li>Use vocabulary-building apps or flashcards to reinforce learning.</li>
+                        </ul>
+                    </div>
+                    <div class="progress" style="--i:{{ results['Vocabulary Usage'] }}; --clr:#43f94a;">
+                        <h3 id="vocabularyPercentage">{{ results['Vocabulary Usage'] }}<span>%</span></h3>
+                        <h4>Vocabulary Usage</h4>
+                    </div>
+                </div>
+                
+                <!-- Politeness Section -->
+                <div class="politeness-wrapper">
+                    <div class="politeness-info">
+                        <h4>6. Politeness Score</h4>
+                        <p>Your politeness score is <strong>{{ results.Politeness }}%</strong>. This score reflects how courteous and respectful your communication style is, which can significantly impact relationships and interactions.</p>
+                        <p>Tips to improve politeness:</p>
+                        <ul>
+                            <li>Use "please" and "thank you" to show appreciation.</li>
+                            <li>Be mindful of tone and body language in verbal communications.</li>
+                            <li>Listen actively and acknowledge the other person's perspective.</li>
+                        </ul>
+                    </div>
+                    <div class="progress" style="--i:{{ results.Politeness }}; --clr:#47ffb5;">
+                        <h3 id="politenessPercentage">{{ results.Politeness }}<span>%</span></h3>
+                        <h4>Politeness</h4>
+                    </div>
+                </div>
+                
+                <!-- Grammar & Spelling Section -->
+                <div class="grammar-wrapper">
+                    <div class="grammar-info">
+                        <h4>7. Grammar & Spelling Score</h4>
+                        <p>Your grammar and spelling score is <strong>45%</strong>. This score indicates areas where grammatical accuracy and correct spelling may need improvement to enhance clarity and professionalism in your writing.</p>
+                        <p>Tips to improve grammar and spelling:</p>
+                        <ul>
+                            <li>Use grammar-check tools or software to catch errors.</li>
+                            <li>Proofread your writing multiple times before finalizing.</li>
+                            <li>Read aloud to identify awkward phrasing and mistakes.</li>
+                        </ul>
+                    </div>
+                    <div class="progress" style="--i:45; --clr:#7e47ff;">
+                        <h3 id="grammar&spellingPercentage">45<span>%</span></h3>
+                        <h4>Grammar & Spelling</h4>
+                    </div>
+                </div>
+
+<!-- Separate section for Detected Errors -->
+<div class="detected-errors">
+    <h5>Total {{ results['Grammar and Spelling'] | length }} Errors Detected in our Conversation:</h5>
+    <ul>
+        {% for error in results['Grammar and Spelling'] %}
+            <li>
+                <strong>Error {{ loop.index }}:</strong> 
+                {% set highlighted_message = error.error %}
+                {% set start = error.offset %}
+                {% set end = error.offset + error.length %}
+                {{ highlighted_message[:start] }}<span class="highlight">{{ highlighted_message[start:end] }}</span>{{ highlighted_message[end:] }}<br>
+
+                <strong>Suggestions:</strong> 
+                {% for suggestion in error.suggestion %}
+                    <strong>{{ suggestion.value }}</strong>{% if not loop.last %}, {% endif %}
+                {% endfor %}<br>
+                
+                <strong>Message:</strong> {{ error.message }}<br>
+                <strong>Offset:</strong> {{ error.offset }}, <strong>Length:</strong> {{ error.length }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+                
+                <button onclick="window.location.href='/'">Back to Home</button>
+            </div>
+        {% endif %}
+        
+        <button id="downloadBtn">Download Results</button>
     </div>
+
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const results = {
+                clarity: {{ results.Clarity }},
+                conciseness: {{ results.Conciseness }},
+                sentiment: {
+                    polarity: {{ results.Sentiment[0] }},
+                    subjectivity: {{ results.Sentiment[1] }}
+                },
+                engagement: {{ results.Engagement }},
+                vocabularyUsage: {{ results['Vocabulary Usage'] }},
+                politeness: {{ results.Politeness }}
+            };
+            
+            const jsonData = JSON.stringify(results, null, 2);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+    
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'results.json';
+    
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+        
+        function animateProgress(progressId, percentageId, targetValue, duration) {
+            const progressElement = document.getElementById(progressId);
+            const percentageElement = document.getElementById(percentageId);
+            let startTime = null;
+
+            function animate(time) {
+                if (!startTime) startTime = time;
+                const progress = Math.min((time - startTime) / duration, 1);
+                const value = Math.round(progress * targetValue);
+
+                progressElement.style.setProperty('--i', value);
+                percentageElement.textContent = value + "%";
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Animate progress bars
+        animateProgress('clarityPercentage', 'clarityPercentage', {{ results.Clarity }}, 2000);
+        animateProgress('concisenessPercentage', 'concisenessPercentage', {{ results.Conciseness }}, 2000);
+        animateProgress('tone&sentimentPercentage', 'tone&sentimentPercentage', {{ results.Sentiment[0] }}, 2000);
+        animateProgress('engagementPercentage', 'engagementPercentage', {{ results.Engagement }}, 2000);
+        animateProgress('grammar&spellingPercentage', 'grammar&spellingPercentage', 45, 2000);
+        animateProgress('vocabularyPercentage', 'vocabularyPercentage', {{ results['Vocabulary Usage'] }}, 2000);
+        animateProgress('politenessPercentage', 'politenessPercentage', {{ results.Politeness }}, 2000);
+    </script>
 </body>
 </html>
