@@ -31,7 +31,6 @@ langchain-ollama==0.2.0
 langchain-text-splitters==0.3.0
 langsmith==0.1.125
 matplotlib-inline==0.1.6
-mkl-service==2.4.0
 multidict==6.1.0
 nest-asyncio==1.5.8
 nltk==3.9.1
