@@ -5,30 +5,22 @@ annotated-types==0.7.0
 anyio==4.6.0
 asttokens==2.4.1
 attrs==24.2.0
-blinker @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/blinker_1699474692786/work
 certifi==2024.8.30
 charset-normalizer==3.3.2
-click @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/click_1699473800648/work
 colorama==0.4.6
 comm==0.2.0
 debugpy==1.8.0
 decorator==5.1.1
-exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1720869315914/work
 executing==2.0.1
-Flask @ file:///C:/b/abs_f9w7doyu0h/croot/flask_1716545924884/work
 frozenlist==1.4.1
 greenlet==3.1.1
 h11==0.14.0
 httpcore==1.0.5
 httpx==0.27.2
 idna==3.10
-importlib_metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1726082825846/work
 ipykernel==6.27.1
 ipython==8.18.1
-itsdangerous @ file:///C:/b/abs_c4vwgdr5yn/croot/itsdangerous_1716533399914/work
 jedi==0.19.1
-Jinja2 @ file:///C:/b/abs_92fccttino/croot/jinja2_1716993447201/work
-joblib @ file:///C:/b/abs_f4b98l6lgk/croot/joblib_1718217224240/work
 jsonpatch==1.33
 jsonpointer==3.0.0
 jupyter_client==8.6.0
@@ -38,21 +30,15 @@ langchain-core==0.3.5
 langchain-ollama==0.2.0
 langchain-text-splitters==0.3.0
 langsmith==0.1.125
-MarkupSafe @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/markupsafe_1707425732791/work
 matplotlib-inline==0.1.6
 mkl-service==2.4.0
-mkl_fft @ file:///C:/b/abs_f55mv94vyg/croot/mkl_fft_1725370278455/work
-mkl_random @ file:///C:/b/abs_21ydbzdu8d/croot/mkl_random_1725370276095/work
 multidict==6.1.0
 nest-asyncio==1.5.8
 nltk==3.9.1
-numpy @ file:///C:/b/abs_c1ywpu18ar/croot/numpy_and_numpy_base_1708638681471/work/dist/numpy-1.26.4-cp312-cp312-win_amd64.whl#sha256=becc06674317799ad0165a939a7613809d0bee9bd328a1e4308c57c39cacf08c
 ollama==0.3.3
 orjson==3.10.7
 packaging==23.2
 parso==0.8.3
-pickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1602536217715/work
-platformdirs @ file:///home/conda/feedstock_root/build_artifacts/platformdirs_1726613481435/work
 prompt-toolkit==3.0.41
 psutil==5.9.6
 pure-eval==0.2.2
@@ -60,30 +46,22 @@ pydantic==2.9.2
 pydantic_core==2.23.4
 Pygments==2.17.2
 pyphen==0.16.0
-python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1709299778482/work
 pywin32==306
 PyYAML==6.0.2
 pyzmq==25.1.2
 regex==2024.9.11
 requests==2.32.3
-scikit-learn @ file:///C:/b/abs_aajc9f7v6r/croot/scikit-learn_1722067652693/work/dist/scikit_learn-1.5.1-cp312-cp312-win_amd64.whl#sha256=96ed6defb86c154d2ff360afdbf0c37c33c4c729d4a15c9d8ada0b70fd817816
-scipy @ file:///C:/b/abs_efv75hqhju/croot/scipy_1717521501389/work/dist/scipy-1.13.1-cp312-cp312-win_amd64.whl#sha256=b29dba691773ea983857b31cad894f31623348583937b6f03783facfd7abc734
 setuptools==75.1.0
-six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
 sniffio==1.3.1
 SQLAlchemy==2.0.35
 stack-data==0.6.3
 tenacity==8.5.0
 textblob==0.18.0.post0
 textstat==0.7.4
-threadpoolctl @ file:///C:/b/abs_def0dwqlft/croot/threadpoolctl_1719407816649/work
 tornado==6.4
 tqdm==4.66.5
 traitlets==5.14.0
-typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1717802530399/work
 urllib3==2.2.3
 wcwidth==0.2.12
-Werkzeug @ file:///C:/b/abs_8bittcw9jr/croot/werkzeug_1716533366070/work
 wheel==0.44.0
 yarl==1.11.1
-zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1726248574750/work
