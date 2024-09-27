@@ -4,6 +4,7 @@ from langchain_core.prompts import ChatPromptTemplate
 import json
 import re
 from evaluation_parameters import evaluate_text
+from level_selector import select_level
 
 app = Flask(__name__)
 
@@ -50,9 +51,10 @@ def results():
 
     # Evaluate the extracted user messages
     evaluation_results = evaluate_text(user_text)
+    evaluation_level = select_level(user_text)
 
     # Render the results page with evaluation data
-    return render_template('results.html', results=evaluation_results)
+    return render_template('results.html', results=evaluation_results, level = evaluation_level)
 
 
 @app.route('/ask', methods=['POST'])

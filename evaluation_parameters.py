@@ -1,9 +1,13 @@
 from textstat import flesch_reading_ease
 def evaluate_clarity(text):
+    if text == '':
+        return 0
     return flesch_reading_ease(text) 
 
 
 def evaluate_conciseness(text):
+    if text == '':
+        return 0
     words = len(text.split())
     sentences = len(text.split('.'))
     avg_sentence_length = words / sentences
@@ -12,6 +16,8 @@ def evaluate_conciseness(text):
 
 from textblob import TextBlob
 def evaluate_sentiment(text):
+    if text == '':
+        return 0
     blob = TextBlob(text)
     sentiment = blob.sentiment
     return sentiment.polarity, sentiment.subjectivity
@@ -19,14 +25,17 @@ def evaluate_sentiment(text):
 
 import re
 def evaluate_engagement(text):
+    if text == '':
+        return 0
     questions = len(re.findall(r'\?', text))
     sentences = len(text.split('.'))
     return questions / sentences
 
 import requests
 def evaluate_grammar(text):
-    # Set up the LanguageTool API endpoint
+
     url = "https://api.languagetool.org/v2/check"
+    # Set up the LanguageTool API endpoint
 
     # Prepare the data to be sent in the request
     data = {
@@ -54,6 +63,8 @@ def evaluate_grammar(text):
 
 
 def evaluate_vocabulary_usage(text):
+    if text == '':
+        return 0
     words = text.split()
     
     if len(words) == 0:
@@ -78,6 +89,8 @@ def evaluate_response_appropriateness(response, previous_text = None):
 
 
 def evaluate_politeness(text):
+    if text == '':
+        return 0
     polite_keywords = [
         "please", "thank you", "kindly", "would you mind", 
         "could you", "appreciate", "grateful", "sorry", "excuse me"

@@ -52,6 +52,38 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
+/* GitHub Icon Style */
+.github-icon {
+    width: 40px; /* Set appropriate size */
+    height: auto; /* Maintain aspect ratio */
+    position: absolute;
+    top: 50%; /* Center vertically */
+    right: 20px; /* Position to the right */
+    transform: translateY(-50%); /* Ensure vertical center alignment */
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Add smooth hover effect */
+}
+
+/* On hover, the icon scales slightly */
+.github-icon:hover {
+    transform: translateY(-50%) scale(1.1); /* Scale up slightly */
+}
+
+/* Ensure GitHub icon is responsive on smaller screens */
+@media (max-width: 768px) {
+    .github-icon {
+        width: 35px; /* Slightly smaller size for mobile */
+        right: 15px; /* Adjust right padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .github-icon {
+        width: 30px; /* Even smaller size for very small screens */
+        right: 10px; /* Adjust padding */
+    }
+}
+
 
 /* Option Buttons */
 .option-container {

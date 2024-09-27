@@ -169,8 +169,22 @@
     </ul>
 </div>
 
+    <div class="gauge">
+        <div class="gauge-needle" id="needle"></div>
+        <div class="gauge-label"></div>
+    </div>
 
-                
+    <div class="level-select">
+        <label>Your Conversation Level Selected as: </label>
+        <select id="levelSelect" onchange="moveNeedle()">
+            <option value="" disabled>Select Level</option>
+            <option value="poor" {% if level == 'Poor' %}selected{% endif %}>Poor</option>
+            <option value="intermediate" {% if level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+            <option value="excellent" {% if level == 'Expert' %}selected{% endif %}>Excellent</option>
+        </select>
+    </div>
+    
+
                 <button onclick="window.location.href='/'">Back to Home</button>
             </div>
         {% endif %}
@@ -235,6 +249,39 @@
         animateProgress('grammar&spellingPercentage', 'grammar&spellingPercentage', 45, 2000);
         animateProgress('vocabularyPercentage', 'vocabularyPercentage', {{ results['Vocabulary Usage'] }}, 2000);
         animateProgress('politenessPercentage', 'politenessPercentage', {{ results.Politeness }}, 2000);
+
+        let isLevelSelected = false;
+
+function moveNeedle() {
+    // Prevent further execution if the level is already selected
+    if (isLevelSelected) return;
+
+    const needle = document.getElementById('needle');
+    const levelSelect = document.getElementById('levelSelect');
+    const level = levelSelect.value;
+
+    // Move the needle based on the selected level
+    if (level === 'poor') {
+        needle.style.transform = 'rotate(-60deg)';  // Move needle to 'poor' zone
+    } else if (level === 'intermediate') {
+        needle.style.transform = 'rotate(0deg)';    // Move needle to 'intermediate' zone
+    } else if (level === 'excellent') {
+        needle.style.transform = 'rotate(60deg)';   // Move needle to 'excellent' zone
+    }
+
+    // Mark that the level is selected and disable further changes
+    isLevelSelected = true;
+    levelSelect.disabled = true; // Disable selection after the first choice
+}
+
+// Ensure that the needle is set when the page loads with the pre-selected value
+window.onload = function() {
+    const levelSelect = document.getElementById('levelSelect');
+    if (levelSelect.value !== "") {
+        moveNeedle();  // Automatically set needle if level is pre-selected
+    }
+};
+
     </script>
 </body>
 </html>

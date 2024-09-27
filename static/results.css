@@ -564,6 +564,109 @@ body {
     transition: transform 2s ease-in-out;
 }
 
+/*Level Selector*/
+
+.gauge {
+    position: relative;
+    width: 400px;
+    height: 150px;
+    background: conic-gradient(
+        rgba(255, 105, 97, 0.7) 60deg,    /* Semi-transparent Coral Red */
+        rgba(255, 223, 77, 0.7) 120deg,   /* Semi-transparent Gold */
+        rgba(144, 238, 144, 0.7) 240deg,  /* Semi-transparent Light Green */
+        rgba(255, 255, 255, 0.3) 360deg   /* Semi-transparent White */
+    );
+    border-radius: 140px 140px 0 0;
+    overflow: hidden;
+    border: 2px solid rgba(51, 51, 51, 0.5); /* Soft transparent border */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Classic soft shadow */
+}
+
+
+.gauge-needle {
+    position: absolute;
+    width: 4px;
+    height: 140px; 
+    background-color: black;
+    top: 5%;
+    left: 50%;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    transform-origin: bottom;
+    transform: rotate(-60deg); 
+    transition: transform 0.5s ease-out;
+}
+
+.gauge-label {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 20px;
+    background: black;
+    border-radius: 100px 100px 0 0;
+    padding: 10px 0;
+    min-width: 50px; 
+    min-height: 20px; 
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Classic border color */
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255); /* Classic background color */
+    color: black; /* Classic text color */
+    margin: 20px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; /* Transition for background and border */
+}
+
+select:focus {
+    border-color: #6200ea; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+select:disabled {
+    background-color: #f0f0f0; /* Light gray for disabled state */
+    cursor: not-allowed;
+}
+
+.level-select {
+    display: flex;
+    align-items: center;
+    font-family: "Arial", sans-serif;
+}
+
+.level-select label {
+    font-size: 18px;
+    color: #333; /* Classic dark color */
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.level-select select {
+    font-size: 20px;
+    padding: 5px 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333; /* Classic text color */
+    font-weight: bold;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.level-select select:focus {
+    border-color: #333; /* Classic darker border on focus */
+}
+
+/*Level Selector*/
+
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .results-container h1 {
