@@ -58,7 +58,7 @@
                 <div class="sentiment-wrapper">
                     <div class="sentiment-info">
                         <h4>3. Tone & Sentiment Score</h4>
-                        <p>The tone and sentiment of your communication is measured at <strong>{{ results.Sentiment[0] }}%</strong>. A score closer to 100% reflects a highly positive or neutral tone, while a lower score indicates a more negative tone.</p>
+                        <p>The tone and sentiment of your communication is measured at <strong>{{ results.Sentiment }}%</strong>. A score closer to 100% reflects a highly positive or neutral tone, while a lower score indicates a more negative tone.</p>
                         <p>Suggestions for adjusting tone and sentiment:</p>
                         <ul>
                             <li>For a more positive tone, use uplifting language and avoid negative words.</li>
@@ -66,8 +66,8 @@
                             <li>To achieve a neutral tone, focus on factual statements and avoid emotional extremes.</li>
                         </ul>
                     </div>
-                    <div class="progress" style="--i:{{ results.Sentiment[0] }}; --clr:#c629fb;">
-                        <h3 id="tone&sentimentPercentage">{{ results.Sentiment[0] }}<span>%</span></h3>
+                    <div class="progress" style="--i:{{ results.Sentiment }}; --clr:#c629fb;">
+                        <h3 id="tone&sentimentPercentage">{{ results.Sentiment }}<span>%</span></h3>
                         <h4>Tone & Sentiment</h4>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                 <div class="vocabulary-wrapper">
                     <div class="vocabulary-info">
                         <h4>5. Vocabulary Usage Score</h4>
-                        <p>Your vocabulary usage score is <strong>{{ results['Vocabulary Usage'] }}%</strong>. This score reflects the richness and variety of words used in your writing, which contributes to clarity and engagement.</p>
+                        <p>Your vocabulary usage score is <strong>{{ results.Usage }}%</strong>. This score reflects the richness and variety of words used in your writing, which contributes to clarity and engagement.</p>
                         <p>Tips to improve vocabulary usage:</p>
                         <ul>
                             <li>Read widely across different genres to expose yourself to new words.</li>
@@ -103,8 +103,8 @@
                             <li>Use vocabulary-building apps or flashcards to reinforce learning.</li>
                         </ul>
                     </div>
-                    <div class="progress" style="--i:{{ results['Vocabulary Usage'] }}; --clr:#43f94a;">
-                        <h3 id="vocabularyPercentage">{{ results['Vocabulary Usage'] }}<span>%</span></h3>
+                    <div class="progress" style="--i:{{ results.Usage }}; --clr:#43f94a;">
+                        <h3 id="vocabularyPercentage">{{ results.Usage }}<span>%</span></h3>
                         <h4>Vocabulary Usage</h4>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                 <div class="grammar-wrapper">
                     <div class="grammar-info">
                         <h4>7. Grammar & Spelling Score</h4>
-                        <p>Your grammar and spelling score is <strong>45%</strong>. This score indicates areas where grammatical accuracy and correct spelling may need improvement to enhance clarity and professionalism in your writing.</p>
+                        <p>Your grammar and spelling score is <strong>{{ results.Grammar }}%</strong>. This score indicates areas where grammatical accuracy and correct spelling may need improvement to enhance clarity and professionalism in your writing.</p>
                         <p>Tips to improve grammar and spelling:</p>
                         <ul>
                             <li>Use grammar-check tools or software to catch errors.</li>
@@ -139,118 +139,113 @@
                             <li>Read aloud to identify awkward phrasing and mistakes.</li>
                         </ul>
                     </div>
-                    <div class="progress" style="--i:45; --clr:#7e47ff;">
-                        <h3 id="grammar&spellingPercentage">45<span>%</span></h3>
+                    <div class="progress" style="--i:{{ results.Grammar }}; --clr:#7e47ff;">
+                        <h3 id="grammar&spellingPercentage">{{ results.Grammar }}<span>%</span></h3>
                         <h4>Grammar & Spelling</h4>
                     </div>
                 </div>
 
-<!-- Separate section for Detected Errors -->
-<div class="detected-errors">
-    <h5>Total {{ results['Grammar and Spelling'] | length }} Errors Detected in our Conversation:</h5>
-    <ul>
-        {% for error in results['Grammar and Spelling'] %}
-            <li>
-                <strong>Error {{ loop.index }}:</strong> 
-                {% set highlighted_message = error.error %}
-                {% set start = error.offset %}
-                {% set end = error.offset + error.length %}
-                {{ highlighted_message[:start] }}<span class="highlight">{{ highlighted_message[start:end] }}</span>{{ highlighted_message[end:] }}<br>
+                <!-- Separate section for Detected Errors -->
+                <div class="detected-errors">
+                    <h5>Total {{ gram_spell['Grammar and Spelling'] | length }} Errors Detected in our Conversation:</h5>
+                    <ul>
+                        {% for error in gram_spell['Grammar and Spelling'] %}
+                            <li>
+                                <strong>Error {{ loop.index }}:</strong> 
+                                {% set highlighted_message = error.error %}
+                                {% set start = error.offset %}
+                                {% set end = error.offset + error.length %}
+                                {{ highlighted_message[:start] }}<span class="highlight">{{ highlighted_message[start:end] }}</span>{{ highlighted_message[end:] }}<br>
 
-                <strong>Suggestions:</strong> 
-                {% for suggestion in error.suggestion %}
-                    <strong>{{ suggestion.value }}</strong>{% if not loop.last %}, {% endif %}
-                {% endfor %}<br>
-                
-                <strong>Message:</strong> {{ error.message }}<br>
-                <strong>Offset:</strong> {{ error.offset }}, <strong>Length:</strong> {{ error.length }}
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+                                <strong>Suggestions:</strong> 
+                                {% for suggestion in error.suggestion %}
+                                    <strong>{{ suggestion.value }}</strong>{% if not loop.last %}, {% endif %}
+                                {% endfor %}<br>
+                                
+                                <strong>Message:</strong> {{ error.message }}<br>
+                                <strong>Offset:</strong> {{ error.offset }}, <strong>Length:</strong> {{ error.length }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
 
-    <div class="gauge">
-        <div class="gauge-needle" id="needle"></div>
-        <div class="gauge-label"></div>
-    </div>
-
-    <div class="level-select">
-        <label>Your Conversation Level Selected as: </label>
-        <select id="levelSelect" onchange="moveNeedle()">
-            <option value="" disabled>Select Level</option>
-            <option value="poor" {% if level == 'Poor' %}selected{% endif %}>Poor</option>
-            <option value="intermediate" {% if level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
-            <option value="excellent" {% if level == 'Expert' %}selected{% endif %}>Excellent</option>
-        </select>
-    </div>
+                <div class="gauge">
+                    <div class="gauge-needle" id="needle"></div>
+                    <div class="gauge-label"></div>
+                </div>
+            
+                <div class="level-select">
+                    <label>Your Conversation Level Selected as: </label>
+                    <select id="levelSelect" onchange="moveNeedle()">
+                        <option value="" disabled>Select Level</option>
+                        <option value="poor" {% if level == 'Poor' %}selected{% endif %}>Poor</option>
+                        <option value="intermediate" {% if level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+                        <option value="excellent" {% if level == 'Expert' %}selected{% endif %}>Excellent</option>
+                    </select>
+                </div>
     
 
                 <button onclick="window.location.href='/'">Back to Home</button>
             </div>
         {% endif %}
         
-        <button id="downloadBtn">Download Results</button>
+        <button id="downloadPdfButton">Download PDF</button>
     </div>
 
-    <script>
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            const results = {
-                clarity: {{ results.Clarity }},
-                conciseness: {{ results.Conciseness }},
-                sentiment: {
-                    polarity: {{ results.Sentiment[0] }},
-                    subjectivity: {{ results.Sentiment[1] }}
-                },
-                engagement: {{ results.Engagement }},
-                vocabularyUsage: {{ results['Vocabulary Usage'] }},
-                politeness: {{ results.Politeness }}
-            };
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
+        document.getElementById('downloadPdfButton').addEventListener('click', function() {
+            const element = document.querySelector('.container'); // Select the container to export
+            const button = document.getElementById('downloadPdfButton');
+            const button2 = document.getElementById('backButton');
             
-            const jsonData = JSON.stringify(results, null, 2);
-            const blob = new Blob([jsonData], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-    
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'results.json';
-    
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            // Hiding the button for generating jpeg image
+            button.classList.add('hide-on-pdf');
+            button2.classList.add('hide-on-pdf');
+        
+            const opt = {
+                margin:       1,
+                filename:     'communication_progress_report.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+        
+            // Use html2pdf to generate PDF
+            html2pdf().from(element).set(opt).save().then(() => {
+                // Show the button again after saving
+                button.classList.remove('hide-on-pdf');
+                button2.classList.remove('hide-on-pdf');
+            });
         });
         
+                
         function animateProgress(progressId, percentageId, targetValue, duration) {
             const progressElement = document.getElementById(progressId);
             const percentageElement = document.getElementById(percentageId);
-            let startTime = null;
-
-            function animate(time) {
-                if (!startTime) startTime = time;
-                const progress = Math.min((time - startTime) / duration, 1);
-                const value = Math.round(progress * targetValue);
-
-                progressElement.style.setProperty('--i', value);
-                percentageElement.textContent = value + "%";
-
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                }
+            
+            // Set the progress immediately for animation
+            progressElement.style.setProperty('--i', targetValue);
+            percentageElement.innerHTML = targetValue + "<span>%</span>";
+            
+            // Add or remove class based on target value
+            if (targetValue < 50) {
+                progressElement.classList.add('less');
+            } else {
+                progressElement.classList.remove('less');
             }
-
-            requestAnimationFrame(animate);
         }
+        
+                // Animate the Clarity progress bar
+                animateProgress('clarityProgress', 'clarityPercentage', {{ results.Clarity }}, 5000);
+                animateProgress('concisenessProgress', 'concisenessPercentage', {{ results.Conciseness }}, 5000);
+                animateProgress('tone&sentimentProgress', 'tone&sentimentPercentage', {{ results.Sentiment }}, 5000);
+                animateProgress('engagementProgress', 'engagementPercentage', {{ results.Engagement }}, 5000);
+                animateProgress('grammar&spellingProgress', 'grammar&spellingPercentage', {{ results.Grammar}}, 5000);
+                animateProgress('vocabularyProgress', 'vocabularyPercentage', {{ results.Usage }}, 5000);
+                animateProgress('politenessProgress', 'politenessPercentage', {{ results.Politeness }}, 5000);
+            
 
-        // Animate progress bars
-        animateProgress('clarityPercentage', 'clarityPercentage', {{ results.Clarity }}, 2000);
-        animateProgress('concisenessPercentage', 'concisenessPercentage', {{ results.Conciseness }}, 2000);
-        animateProgress('tone&sentimentPercentage', 'tone&sentimentPercentage', {{ results.Sentiment[0] }}, 2000);
-        animateProgress('engagementPercentage', 'engagementPercentage', {{ results.Engagement }}, 2000);
-        animateProgress('grammar&spellingPercentage', 'grammar&spellingPercentage', 45, 2000);
-        animateProgress('vocabularyPercentage', 'vocabularyPercentage', {{ results['Vocabulary Usage'] }}, 2000);
-        animateProgress('politenessPercentage', 'politenessPercentage', {{ results.Politeness }}, 2000);
-
-        let isLevelSelected = false;
+                let isLevelSelected = false;
 
 function moveNeedle() {
     // Prevent further execution if the level is already selected
@@ -281,6 +276,7 @@ window.onload = function() {
         moveNeedle();  // Automatically set needle if level is pre-selected
     }
 };
+
 
     </script>
 </body>

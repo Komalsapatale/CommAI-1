@@ -61,6 +61,10 @@ function checkEnter(event) {
 }
 
 function startRecognition() {
+    const pulseButton = document.getElementById('pulse');
+    const micIcon = document.getElementById('mic-icon');
+    pulseButton.classList.add('pulsing');
+
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'en-US';
     recognition.interimResults = false;
@@ -83,8 +87,26 @@ function startRecognition() {
             appendMessage(aiResponse, 'ai');
             conversation.push({ sender: 'ai', message: aiResponse });
         });
+
+        // Stop pulsing after processing the result
+        pulseButton.classList.remove('pulsing');
+        micIcon.classList.remove('fa-microphone'); // Change icon to microphone-slash
+        micIcon.classList.add('fa-microphone-slash');
+    };
+
+    recognition.onstart = () => {
+        // Ensure the button keeps pulsing while listening
+        pulseButton.classList.add('pulsing');
+        micIcon.classList.remove('fa-microphone-slash'); // Change icon to microphone-lines
+        micIcon.classList.add('fa-microphone');
+    };
+
+    recognition.onend = () => {
+        // Remove the pulsing effect when recognition ends
+        pulseButton.classList.remove('pulsing');
+        micIcon.classList.remove('fa-microphone'); // Change icon back to microphone-slash
+        micIcon.classList.add('fa-microphone-slash');
     };
 
     recognition.start();
 }
-

@@ -5,6 +5,7 @@ import json
 import re
 from evaluation_parameters import evaluate_text
 from level_selector import select_level
+from grammer_spelling import evaluate_grammer_spelling
 
 app = Flask(__name__)
 
@@ -39,7 +40,7 @@ def extract_user_messages_from_file(file_path='conversations.json'):
     user_messages = re.findall(r'"sender":"user","message":"(.*?)"', json_string)
 
     if not user_messages:
-        return ""
+        return ''
 
     return '\n'.join(user_messages)
 
@@ -52,9 +53,10 @@ def results():
     # Evaluate the extracted user messages
     evaluation_results = evaluate_text(user_text)
     evaluation_level = select_level(user_text)
+    grammer_spelling_evaluation = evaluate_grammer_spelling(user_text) 
 
     # Render the results page with evaluation data
-    return render_template('results.html', results=evaluation_results, level = evaluation_level)
+    return render_template('results.html', gram_spell = grammer_spelling_evaluation, results=evaluation_results, level = evaluation_level)
 
 
 @app.route('/ask', methods=['POST'])
@@ -62,7 +64,6 @@ def ask():
     user_input = request.json.get('message')
     conversation = request.json.get('conversation', '')
 
-    user_input = user_input.capitalize()
 
     # Append the user input to the conversation history
     conversation += f"\nUser: {user_input}"

@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 body {
     font-family: Arial, sans-serif;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align content starting from the top */
-    align-items: center;
+    /* height: 100vh; */
+    margin: 0; /*increasing some space between text and circular progress bar*/
+    /* display: flex;
+    flex-direction: column; */
+    /*justify-content: flex-start*/ /* Align content starting from the top */
+    /* align-items: center; */
     background: linear-gradient(135deg, #e4b1c4, #b6e1f4);
-    min-height: 100%; /* Ensure it covers full height */
+   /* min-height: 100%; /* Ensure it covers full height */
     background-attachment: fixed; /* Optional: makes the background fixed */
 }
 
@@ -18,16 +20,16 @@ body {
     padding: 20px;
     text-align: left;
     position: fixed; /* Fix the navbar at the top */
-    top: 0;
-    left: 0;
-    box-sizing: border-box; /* Ensure padding doesn't add extra width */
+    top: 0; /*keeping the navbar at top*/
+    /* left: 0; */ 
+    /*box-sizing: border-box; /* Ensure padding doesn't add extra width */
     z-index: 1000; /* Make sure the navbar stays on top of other content */
 }
 
 /* Padding to prevent content from going under the header */
-.header-spacing {
-    height: 80px; /* Match this to the height of the header */
-}
+/* .header-spacing {
+    height: 80px; /* Match this to the height of the header 
+} */
 
 /* Mobile-specific styles using media queries */
 @media (max-width: 768px) {
@@ -48,17 +50,17 @@ body {
     }
 }
 
-.strong-heading {
-    font-weight: bold; /* Or use a heavier weight if needed */
-    color: #333; /* Example: apply custom color or other styles */
-}
+/* .strong-heading {
+    font-weight: bold; /* Or use a heavier weight if needed 
+    color: #333;  Example: apply custom color or other styles 
+} */
 
 /* Classic Heading Style */
 .header h1 {
     font-size: 30px; /* Set the font size */
-    font-weight: bold; /* Ensure text is bold */
+    /*font-weight: bold; /* Ensure text is bold */
     color: #333; /* Set text color */
-    margin: 0; /* Remove default margin */
+    margin: 0; /* Remove default margin from top and down of Comm AI */
     text-align: left; /* Align text to the left */
     font-family: 'Georgia', serif; /* Classic serif font */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
@@ -67,8 +69,8 @@ body {
 /*extra coding*/
 .clarity-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center; /*for bringing the circular progress bar from top to the level at which clarity text is present*/
+    justify-content: space-between;  /*if you remove this circular progress will get closer to the text*/
     padding: 20px; /* Add padding for spacing */
     margin-bottom: 20px;
 }
@@ -89,20 +91,20 @@ body {
     line-height: 1.5; /* Better readability */
 }
 
-.clarity-info ul {
-    padding-left: 20px; /* Indent for the list */
-}
+/* .clarity-info ul {
+    padding-left: 20px; /* Indent for the list 
+} 
 
 .clarity-info li {
-    font-size: 16px; /* Classic text size */
-    margin-bottom: 5px; /* Space between list items */
+    font-size: 16px; /* Classic text size 
+    margin-bottom: 5px; /* Space between list items 
 }
 
 .progress {
     width: 150px;
     height: 150px;
     position: relative;
-}
+} */
 #clarityPercentage {
     position: absolute;
     top: 50%;
@@ -137,20 +139,20 @@ body {
     line-height: 1.5; /* Better readability */
 }
 
-.conciseness-info ul {
-    padding-left: 20px; /* Indent for the list */
+/* .conciseness-info ul {
+    padding-left: 20px; /* Indent for the list 
 }
 
 .conciseness-info li {
-    font-size: 16px; /* Classic text size */
-    margin-bottom: 5px; /* Space between list items */
+    font-size: 16px; /* Classic text size 
+    margin-bottom: 5px; /* Space between list items 
 }
 
 .progress {
     width: 150px;
     height: 150px;
     position: relative;
-}
+}  */
 
 #concisenessPercentage {
     position: absolute;
@@ -186,22 +188,22 @@ body {
     line-height: 1.5; /* Better readability */
 }
 
-.clarity-info ul {
-    padding-left: 20px; /* Indent for the list */
+/* .clarity-info ul {
+    padding-left: 20px; /* Indent for the list 
 }
 
 .clarity-info li {
-    font-size: 16px; /* Classic text size */
-    margin-bottom: 5px; /* Space between list items */
+    font-size: 16px; /* Classic text size 
+    margin-bottom: 5px; /* Space between list items 
 }
 
 .progress {
     width: 150px;
     height: 150px;
     position: relative;
-}
+} */
 
-#tone&sentimentPercentage {
+#tone\&sentimentPercentage {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -235,20 +237,20 @@ body {
     line-height: 1.5; /* Better readability */
 }
 
-.engagement-info ul {
-    padding-left: 20px; /* Indent for the list */
+/* .engagement-info ul {
+    padding-left: 20px; /* Indent for the list 
 }
 
 .engagement-info li {
-    font-size: 16px; /* Classic text size */
-    margin-bottom: 5px; /* Space between list items */
+    font-size: 16px; /* Classic text size 
+    margin-bottom: 5px; /* Space between list items 
 }
 
 .progress {
     width: 150px;
     height: 150px;
     position: relative;
-}
+} */
 
 #engagementPercentage {
     position: absolute;
@@ -284,20 +286,20 @@ body {
     line-height: 1.5; /* Better readability */
 }
 
-.vocabulary-info ul {
-    padding-left: 20px; /* Indent for the list */
+/* .vocabulary-info ul {
+    padding-left: 20px; /* Indent for the list 
 }
 
 .vocabulary-info li {
-    font-size: 16px; /* Classic text size */
-    margin-bottom: 5px; /* Space between list items */
+    font-size: 16px; /* Classic text size 
+    margin-bottom: 5px; /* Space between list items 
 }
 
 .progress {
     width: 150px;
     height: 150px;
     position: relative;
-}
+} */
 
 #vocabularyPercentage {
     position: absolute;
@@ -333,20 +335,20 @@ body {
     line-height: 1.5; /* Better readability */
 }
 
-.politeness-info ul {
-    padding-left: 20px; /* Indent for the list */
+/* .politeness-info ul {
+    padding-left: 20px; /* Indent for the list 
 }
 
 .politeness-info li {
-    font-size: 16px; /* Classic text size */
-    margin-bottom: 5px; /* Space between list items */
+    font-size: 16px; /* Classic text size 
+    margin-bottom: 5px; /* Space between list items 
 }
 
 .progress {
     width: 150px;
     height: 150px;
     position: relative;
-}
+} */
 
 #politenessPercentage {
     position: absolute;
@@ -384,22 +386,22 @@ body {
     margin-bottom: 10px; /* Space below paragraphs */
 }
 
-.grammar-info ul {
-    padding-left: 20px; /* Indent for the list */
+/* .grammar-info ul {
+    padding-left: 20px; /* Indent for the list 
 }
 
 .grammar-info li {
-    font-size: 16px; /* Classic text size */
-    margin-bottom: 5px; /* Space between list items */
+    font-size: 16px; /* Classic text size 
+    margin-bottom: 5px; /* Space between list items 
 }
 
 .progress {
     width: 150px;
     height: 150px;
     position: relative;
-}
+} */
 
-#grammar&spellingPercentage {
+#grammar\&spellingPercentage { /*escaping the & character using \ slash*/
     position: absolute;
     top: 50%;
     left: 50%;
@@ -413,40 +415,49 @@ body {
 
 /*Errors*/
 .detected-errors {
-    border: 1px solid #ccc; /* Light gray border for a classic look */
-    border-radius: 5px; /* Rounded corners */
-    padding: 15px; /* Inner spacing */
-    background: linear-gradient(135deg, #e4b1c4, #b6e1f4);
-    font-family: 'Times New Roman', Times, serif; /* Classic font */
-    color: #333; /* Dark text color */
-    font-size: 18px; /* Set font size to 15px */
+    border: 3px solid #aaa; /* Slightly darker gray for better contrast */
+    border-radius: 8px; /* Softer, more rounded corners */
+    padding: 20px; /* More padding for better spacing */
+    background: linear-gradient(135deg, #e4b1c4, #b6e1f4); /* Light khaki to light coral gradient */
+/* Darker gradient for a more classic, professional look */
+    font-family: 'Times New Roman', Times, serif; /* Keep classic font */
+    color: #333; /* Darker text color for better readability */
+    font-size: 18px; /* Set consistent font size */
 }
 
 .detected-errors h5 {
-    font-size: 20px; /* Set h5 font size to 15px */
-    margin-bottom: 10px; /* Space below subheading */
-    font-weight: bold; /* Bold for emphasis */
+    font-size: 22px; /* Increase subheading font size for better visibility */
+    margin-bottom: 15px; /* Add more space below subheading */
+    font-weight: bold; /* Emphasize subheading */
+    color: #333; /* Keep subheading color readable and consistent */
 }
 
 .detected-errors ul {
-    padding-left: 20px; /* Indent for the list */
+    padding-left: 25px; /* Add more indent for better list alignment */
+    margin-bottom: 15px; /* Space below the list */
 }
 
 .detected-errors li {
-    margin-bottom: 10px; /* Space between list items */
-    line-height: 1.5; /* Improve readability */
+    margin-bottom: 12px; /* Increase space between list items slightly */
+    line-height: 1.6; /* Further improve readability */
+    font-size: 17px; /* Slightly decrease the size of list items for balance */
+    color: #444; /* Use medium-dark gray for list text */
 }
 
 .detected-errors strong {
-    color: #000; /* Strong text in black for contrast */
+    color: #222; /* Make strong text a darker shade of black for emphasis */
+    font-weight: bold;
 }
 
 .highlight {
-    font-weight: bold; /* Make text bold */
-    color: #000; /* Ensure the text color is dark for visibility */
-    text-decoration: underline; /* Add underline */
+    font-weight: bold; /* Keep highlighted text bold */
+    color: #d9534f; /* Change highlight color to a visible red for emphasis */
+    background-color: #fdf5e6; /* Add light background for highlights */
+    padding: 2px 5px; /* Add padding around the highlighted text */
+    border-radius: 3px; /* Slight rounding for the highlight box */
+    text-decoration: none; /* Remove underline for cleaner look */
 }
-/*Errors*/
+
 
 /*extra coding*/
 
@@ -525,11 +536,13 @@ body {
     font-weight: 500;
 }
 
+/*for increasing and decreasing percentage font-size in circular progress bar*/
 .container .progress h3 span {
     font-size: 0.65em;
     font-weight: 400;
 }
 
+/*for text inside circular progress bar*/
 .container .progress h4 {
     position: absolute;
     top: 20%;
@@ -542,15 +555,6 @@ body {
     text-transform: uppercase;
 }
 
-.container .progress::before {
-    content: '';
-    display: block;
-    height: 100%;
-    margin-left: 50%;
-    transform-origin: left;
-    border-radius: 0 100% 100% 0/50%;
-}
-
 .container .progress::after {
     content: '';
     position: absolute;
@@ -560,8 +564,39 @@ body {
 }
 
 .container .progress::before {
+    content: '';
+    display: block;
+    height: 100%;
+    margin-left: 50%;
+    transform-origin: left;
+    border-radius: 0 100% 100% 0/50%;
+}
+
+.container .progress::before {
     background: var(--clr);
-    transition: transform 2s ease-in-out;
+    /* transition: transform 2s ease-in-out;  */
+    transform:rotate(calc(((var(--i) - 50) * 0.01turn)));
+}
+
+/*if value is less than 50*/
+.container .progress.less::before{
+    background:#444;
+    transform:rotate(calc(((var(--i) - 0) * 0.01turn)));
+}
+
+/* .container .progress::before {
+    background: var(--clr);
+    transform: rotate(calc(var(--i) * 0.01turn)); 
+
+.container .progress.less::before {
+    background: #444;
+} */
+
+
+
+/*for hiding the download button when taking jpeg image for pdf*/
+.hide-on-pdf {
+    display: none;
 }
 
 /*Level Selector*/
@@ -595,9 +630,10 @@ body {
     border-top-left-radius: 100%;
     border-top-right-radius: 100%;
     transform-origin: bottom;
-    transform: rotate(-60deg); 
-    transition: transform 0.5s ease-out;
+    transform: rotate(0deg); 
+    transition: transform 0.5s ease-out; /* Smooth transition for the needle movement */
 }
+
 
 .gauge-label {
     position: absolute;
@@ -676,5 +712,25 @@ select:disabled {
     .results-container button {
         padding: 10px 20px;
         font-size: 14px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media print {
+    .progress {
+        position: relative;
+        height: 50px; /* Adjust height as needed */
+        background-color: #e0e0e0; /* Default background */
+    }
+    .progress::before {
+        content: '';
+        position: absolute;
+        width: var(--i);
+        height: 100%;
+        background: var(--clr);
+        transition: none; /* Disable transitions for print */
+    }
+    .progress.less::before {
+        background: #444;
+        width: var(--i);
     }
 }

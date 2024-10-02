@@ -325,4 +325,56 @@ body {
     }
 }
 
+/* Microphone CSS */
+#pulse {
+    position: absolute;
+    bottom: 30px; /* Adjust this value to control how far from the bottom you want it */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    width: 80px;
+    height: 80px;
+    background: #000000;
+    color: #fff;
+    border-radius: 50%;
+    border-color: #fff;
+    text-align: center;
+    line-height: 84px;
+    font-size: 48px;
+    transition: transform 0.2s; /* Optional: Add a transition for button press */
+}
 
+
+#pulse.pulsing:before,
+#pulse.pulsing:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border: 50%;
+    border: 1px solid #414141;
+    left: -20px;
+    right: -20px;
+    top: -20px;
+    bottom: -20px;
+    border-radius: 50%;
+    animation: animate 1.5s linear infinite;
+    opacity: 0;
+    backface-visibility: hidden;
+}
+
+#pulse.pulsing:after {
+    animation-delay: 0.5s;
+}
+
+@keyframes animate {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
